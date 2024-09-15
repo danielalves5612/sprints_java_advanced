@@ -7,18 +7,18 @@ import java.util.List;
 @Entity
 public class Fazenda {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @SequenceGenerator(name = "fazenda_seq", sequenceName = "fazenda_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "fazenda_seq")
     private Long id;
+
     private String dono;
     private String latitude;
     private String longitude;
     private Integer tamanho;
 
-    //1 fazenda pode ter varias culturas
     @OneToMany(mappedBy = "fazenda", cascade = CascadeType.ALL)
     private List<Colheita> listaColheita;
 
-    //1 fazenda pode ter varios historicos de dados climaticos
     @OneToMany(mappedBy = "fazenda", cascade = CascadeType.ALL)
     private List<DadosClimaticos> dadosClimaticos;
 

@@ -1,21 +1,19 @@
 package br.com.fiap.previsaoSafra.controller;
 
 import br.com.fiap.previsaoSafra.controller.dto.ColheitaDTO;
-import br.com.fiap.previsaoSafra.controller.dto.FazendaDTO;
 import br.com.fiap.previsaoSafra.model.Colheita;
-import br.com.fiap.previsaoSafra.model.Fazenda;
-import br.com.fiap.previsaoSafra.repository.ColheitaRepository;
 import br.com.fiap.previsaoSafra.service.ColheitaService;
-import br.com.fiap.previsaoSafra.service.FazendaService;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model; // Atenção a essa importação
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
+@Controller
 @RequestMapping("/api/colheita")
 public class ColheitaController {
     private final ColheitaService colheitaService;
@@ -56,4 +54,10 @@ public class ColheitaController {
         return ResponseEntity.ok().build();
     }
 
+    // Método para renderizar o formulário de cadastro de colheita
+    @GetMapping("/form")
+    public String mostrarFormularioColheita(Model model) {
+        model.addAttribute("colheita", new ColheitaDTO()); // Adiciona um objeto vazio para o formulário
+        return "colheita_form"; // Nome do arquivo HTML sem a extensão
+    }
 }

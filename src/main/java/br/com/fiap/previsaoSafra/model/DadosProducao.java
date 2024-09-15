@@ -8,10 +8,13 @@ import java.util.List;
 @Entity
 public class DadosProducao {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @SequenceGenerator(name = "dados_producao_seq", sequenceName = "dados_producao_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "dados_producao_seq")
     private Long id;
+
     @ManyToOne
     private Colheita colheita;
+
     private LocalDate dataColheita;
     private Integer qtdProduzida;
     private List<String> listaFertilizantes;

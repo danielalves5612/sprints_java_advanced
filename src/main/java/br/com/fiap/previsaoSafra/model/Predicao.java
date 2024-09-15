@@ -7,14 +7,18 @@ import java.time.LocalDate;
 @Entity
 public class Predicao {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @SequenceGenerator(name = "predicao_seq", sequenceName = "predicao_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "predicao_seq")
     private Long id;
+
     @ManyToOne
     @JoinColumn(name = "colheita_id")
     private Colheita colheita;
+
     @ManyToOne
     @JoinColumn(name = "fazenda_id")
     private Fazenda fazenda;
+
     private LocalDate dataPredicao;
     private Integer qtdPrevista;
 

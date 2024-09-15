@@ -7,8 +7,10 @@ import java.time.LocalDate;
 @Entity
 public class DadosClimaticos {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @SequenceGenerator(name = "dados_climaticos_seq", sequenceName = "dados_climaticos_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "dados_climaticos_seq")
     private Long id;
+
     private LocalDate dataLocal;
     private Double temperaturaGraus;
     private Integer umidade;

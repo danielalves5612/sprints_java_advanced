@@ -7,16 +7,19 @@ import java.util.List;
 @Entity
 public class Colheita {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @SequenceGenerator(name = "colheita_seq", sequenceName = "colheita_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "colheita_seq")
     private Long id;
+
     private String nome;
     private String tipo;
     private String estacaoDoAno;
+
     @OneToMany(mappedBy = "colheita", cascade = CascadeType.ALL)
     private List<DadosProducao> dadosProducao;
+
     @ManyToOne(cascade = CascadeType.ALL)
     private Fazenda fazenda;
-
     public Long getId() {
         return id;
     }

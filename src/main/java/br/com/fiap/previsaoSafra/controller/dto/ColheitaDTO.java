@@ -1,9 +1,6 @@
 package br.com.fiap.previsaoSafra.controller.dto;
 
-
 import br.com.fiap.previsaoSafra.model.DadosProducao;
-import br.com.fiap.previsaoSafra.model.Fazenda;
-import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
@@ -14,34 +11,15 @@ public class ColheitaDTO {
 
     private Long id;
 
-    @NotBlank
+    @NotBlank(message = "O nome da colheita é obrigatório")
     private String nome;
 
-    @NotBlank
+    @NotBlank(message = "O tipo da colheita é obrigatório")
     private String tipo;
 
-    @NotBlank
+    @NotBlank(message = "A estação do ano é obrigatória")
     private String estacaoDoAno;
 
+    // Lista de dados de produção associados à colheita
     private List<DadosProducao> dadosProducao;
-
-    public Long getId() {return id;}
-
-    public void setId(Long id) {this.id = id;}
-
-    public String getNome() {return nome;}
-
-    public void setNome(String nome) {this.nome = nome;}
-    public String getTipo() {return tipo;}
-
-    public void setTipo(String tipo) {this.tipo = tipo;}
-
-    public String getEstacaoDoAno() {return estacaoDoAno;}
-
-    public void setEstacaoDoAno(String estacaoDoAno) {this.estacaoDoAno = estacaoDoAno;    }
-
-    public List<DadosProducao> getDadosProducao() {return dadosProducao;}
-
-    public void setDadosProducao(List<DadosProducao> dadosProducao) {this.dadosProducao = dadosProducao;}
 }
-

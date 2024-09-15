@@ -15,22 +15,22 @@ public class FazendaService {
     @Autowired
     private FazendaRepository fazendaRepository;
 
-//    Cadastrar fazenda
+    // Cadastrar fazenda
     public Fazenda cadastrarFazenda(FazendaDTO fazendaDTO) {
         Fazenda fazenda = new Fazenda();
         fazenda.setDono(fazendaDTO.getDono());
         fazenda.setLatitude(fazendaDTO.getLatitude());
         fazenda.setLongitude(fazendaDTO.getLongitude());
         fazenda.setTamanho(fazendaDTO.getTamanho());
-        return fazendaRepository.save(fazenda); }
+        return fazendaRepository.save(fazenda); 
+    }
 
-//    Atualizar fazenda
+    // Atualizar fazenda
     public Fazenda atualizarFazenda(Long id, FazendaDTO novaFazenda) {
         Optional<Fazenda> fazendaExistente = fazendaRepository.findById(id);
 
         if (fazendaExistente.isPresent()) {
             Fazenda fazendaAtualizada = fazendaExistente.get();
-
             fazendaAtualizada.setDono(novaFazenda.getDono());
             fazendaAtualizada.setLatitude(novaFazenda.getLatitude());
             fazendaAtualizada.setLongitude(novaFazenda.getLongitude());
@@ -43,19 +43,27 @@ public class FazendaService {
         }
     }
 
-//    Listar as Fazendas
-    public List<Fazenda> listarFazendas() { return fazendaRepository.findAll(); }
+    // Listar as Fazendas
+    public List<Fazenda> listarFazendas() {
+        return fazendaRepository.findAll();
+    }
 
-    public List<Fazenda> listarFazendaPeloDono(String dono) { return fazendaRepository.findByDono(dono); }
+    public List<Fazenda> listarFazendaPeloDono(String dono) {
+        return fazendaRepository.findByDono(dono);
+    }
 
-//    Deletar Fazenda
-
+    // Deletar Fazenda
     public void removerFazenda(Long id) {
         if (fazendaRepository.existsById(id)) {
             fazendaRepository.deleteById(id);
         } else {
-            throw new RuntimeException("Fazenda não encontrado com o ID: " + id);
+            throw new RuntimeException("Fazenda não encontrada com o ID: " + id);
         }
     }
 
+    // Buscar fazenda por ID
+    public Fazenda buscarFazendaPorId(Long id) {
+        Optional<Fazenda> fazendaOptional = fazendaRepository.findById(id);
+        return fazendaOptional.orElseThrow(() -> new RuntimeException("Fazenda não encontrada com o ID: " + id));
+    }
 }
