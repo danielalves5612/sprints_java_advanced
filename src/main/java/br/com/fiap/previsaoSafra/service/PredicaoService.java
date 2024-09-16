@@ -17,14 +17,12 @@ public class PredicaoService {
     @Autowired
     private PredicaoRepository predicaoRepository;
 
-    //    Cadastrar predicao
     public Predicao cadastrarPredicao(PredicaoDTO predicaoDTO) {
         Predicao predicao = new Predicao();
         predicao.setDataPredicao(predicaoDTO.getDataPredicao());
         predicao.setQtdPrevista(predicaoDTO.getQtdPrevista());
         return predicaoRepository.save(predicao); }
 
-    //    Atualizar predicao
     public Predicao atualizarPredicao(Long id, PredicaoDTO novaPredicao) {
         Optional<Predicao> predicaoExistente = predicaoRepository.findById(id);
 
@@ -40,11 +38,7 @@ public class PredicaoService {
         }
     }
 
-    //    Listar as Predições
     public List<Predicao> listarPredicao() { return predicaoRepository.findAll(); }
-
-
-//    Deletar Predicao
 
     public void removerPredicao(Long id) {
         if (predicaoRepository.existsById(id)) {

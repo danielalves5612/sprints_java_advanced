@@ -15,7 +15,6 @@ public class FazendaService {
     @Autowired
     private FazendaRepository fazendaRepository;
 
-    // Cadastrar fazenda
     public Fazenda cadastrarFazenda(FazendaDTO fazendaDTO) {
         Fazenda fazenda = new Fazenda();
         fazenda.setDono(fazendaDTO.getDono());
@@ -25,7 +24,6 @@ public class FazendaService {
         return fazendaRepository.save(fazenda); 
     }
 
-    // Atualizar fazenda
     public Fazenda atualizarFazenda(Long id, FazendaDTO novaFazenda) {
         Optional<Fazenda> fazendaExistente = fazendaRepository.findById(id);
 
@@ -43,7 +41,6 @@ public class FazendaService {
         }
     }
 
-    // Listar as Fazendas
     public List<Fazenda> listarFazendas() {
         return fazendaRepository.findAll();
     }
@@ -52,7 +49,6 @@ public class FazendaService {
         return fazendaRepository.findByDono(dono);
     }
 
-    // Deletar Fazenda
     public void removerFazenda(Long id) {
         if (fazendaRepository.existsById(id)) {
             fazendaRepository.deleteById(id);
@@ -61,7 +57,6 @@ public class FazendaService {
         }
     }
 
-    // Buscar fazenda por ID
     public Fazenda buscarFazendaPorId(Long id) {
         Optional<Fazenda> fazendaOptional = fazendaRepository.findById(id);
         return fazendaOptional.orElseThrow(() -> new RuntimeException("Fazenda não encontrada com o ID: " + id));

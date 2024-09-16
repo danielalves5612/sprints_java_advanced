@@ -40,7 +40,6 @@ public class ColheitaService {
         }
     }
 
-    // Listar as Colheitas
     public List<Colheita> listarColheitas() {
         return colheitaRepository.findAll();
     }
@@ -49,7 +48,6 @@ public class ColheitaService {
         return colheitaRepository.findByNomeContainingOrTipoContainingOrEstacaoDoAnoContaining(nome, tipo, estacaoDoAno);
     }
 
-    // Deletar Colheita
     public void removerColheita(Long id) {
         if (colheitaRepository.existsById(id)) {
             colheitaRepository.deleteById(id);
@@ -58,7 +56,6 @@ public class ColheitaService {
         }
     }
 
-    // Buscar colheita por ID
     public Colheita buscarColheitaPorId(Long id) {
         Optional<Colheita> colheitaOptional = colheitaRepository.findById(id);
         return colheitaOptional.orElseThrow(() -> new RuntimeException("Colheita não encontrada com o ID: " + id));

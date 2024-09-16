@@ -20,6 +20,5 @@ public class ColheitaDTO {
     @NotBlank(message = "A estação do ano é obrigatória")
     private String estacaoDoAno;
 
-    // Lista de dados de produção associados à colheita
     private List<DadosProducao> dadosProducao;
 }

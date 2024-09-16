@@ -26,7 +26,6 @@ public class Imagem {
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataUpload;
 
-    // Getters e Setters
     public Long getId() {
         return id;
     }

@@ -53,7 +53,6 @@ public class FazendaController {
         return "fazenda_colheita_form";
     }
 
-    // Exclusão de fazenda
     @GetMapping("/delete/{id}")
     public String excluirFazenda(@PathVariable Long id, Model model) {
         try {
@@ -64,14 +63,12 @@ public class FazendaController {
         return "redirect:/api/fazenda/form";
     }
 
-    // Cadastro de colheita
     @PostMapping("/colheita")
     public String cadastrarColheita(@ModelAttribute ColheitaDTO colheitaDTO) {
         colheitaService.cadastrarColheita(colheitaDTO);
         return "redirect:/api/fazenda/form";
     }
 
-    // Edição de colheita
     @GetMapping("/colheita/edit/{id}")
     public String editarColheita(@PathVariable Long id, Model model) {
         Colheita colheita = colheitaService.buscarColheitaPorId(id);
@@ -79,7 +76,6 @@ public class FazendaController {
         return "fazenda_colheita_form";
     }
 
-    // Exclusão de colheita
     @GetMapping("/colheita/delete/{id}")
     public String excluirColheita(@PathVariable Long id) {
         colheitaService.removerColheita(id);

@@ -25,9 +25,7 @@ public class FazendaDTO {
     @NotNull(message = "O tamanho da fazenda é obrigatório")
     private Integer tamanho;
 
-    // Lista de colheitas associadas à fazenda
     private List<Colheita> listaColheita;
 
-    // Dados climáticos associados à fazenda
     private List<DadosClimaticos> dadosClimaticos;
 }

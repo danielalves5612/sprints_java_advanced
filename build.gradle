@@ -27,7 +27,7 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.1.0'
 	implementation 'com.oracle.database.jdbc:ojdbc8:19.8.0.0'
-	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf' // Correção aqui
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf' 
 }
 
 tasks.named('test') {

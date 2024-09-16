@@ -8,7 +8,7 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model; // Atenção a essa importação
+import org.springframework.ui.Model; 
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -54,10 +54,10 @@ public class ColheitaController {
         return ResponseEntity.ok().build();
     }
 
-    // Método para renderizar o formulário de cadastro de colheita
+   
     @GetMapping("/form")
     public String mostrarFormularioColheita(Model model) {
-        model.addAttribute("colheita", new ColheitaDTO()); // Adiciona um objeto vazio para o formulário
-        return "colheita_form"; // Nome do arquivo HTML sem a extensão
+        model.addAttribute("colheita", new ColheitaDTO()); 
+        return "colheita_form"; 
     }
 }

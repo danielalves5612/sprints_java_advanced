@@ -39,9 +39,9 @@ CREATE TABLE DadosProducao (
 CREATE TABLE DadosClimaticos (
     id NUMBER not null auto_increment,
     data_local DATE,
-    temperatura_graus NUMBER(5, 2), -- Temperatura com precisão
+    temperatura_graus NUMBER(5, 2), 
     umidade NUMBER,
-    precipitacao NUMBER(5, 2), -- Precipitação com precisão
+    precipitacao NUMBER(5, 2), 
     fazenda_id NUMBER,
     primary key (id),
     FOREIGN KEY (fazenda_id) REFERENCES Fazenda(id)
