@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login - CPA</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <style>
+        body {
+            background-color: #E8F5E9;
+            color: #2E7D32;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            font-family: 'Arial', sans-serif;
+        }
+        .container {
+            max-width: 400px;
+            width: 100%;
+        }
+        .login-form, .register-form {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .login-button, .register-button, .google-button {
+            background-color: #2E7D32;
+            color: #ffffff;
+            margin-top: 10px;
+            border: none;
+            font-weight: bold;
+            font-size: 1rem;
+        }
+        .google-button {
+            background-color: #4285F4;
+        }
+        .toggle-link {
+            text-align: center;
+            margin-top: 15px;
+            color: #2E7D32;
+        }
+        .toggle-link a {
+            color: #2E7D32;
+            font-weight: bold;
+            text-decoration: underline;
+        }
+        .input {
+            background-color: #F1F8E9;
+            border: 1px solid #AED581;
+            color: #2E7D32;
+        }
+        .input::placeholder {
+            color: #9E9E9E;
+        }
+        .input:focus {
+            border-color: #66BB6A;
+            box-shadow: none;
+        }
+        .label {
+            color: #000000; 
+        }
+        .logo img {
+            max-width: 150px; 
+            height: auto;
+            display: block;
+            margin: 0 auto 20px; 
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="login-section" class="login-form">
+            <div class="logo">
+                <img src="/css/logo-cpa.png" alt="Logo CPA">
+            </div>
+            <h2 class="title is-4 has-text-centered" style="color: #000000;">Login</h2>
+            <form action="/login" method="post">
+                <div class="field">
+                    <label class="label">E-mail</label>
+                    <div class="control">
+                        <input class="input" type="email" name="email" placeholder="Digite seu e-mail" required>
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Senha</label>
+                    <div class="control">
+                        <input class="input" type="password" name="password" placeholder="Digite sua senha" required>
+                    </div>
+                </div>
+                <div class="field">
+                    <button type="submit" class="button is-fullwidth login-button">Entrar</button>
+                </div>
+            </form>
+
+            <a href="/oauth2/authorization/google" class="button is-fullwidth google-button mt-3">
+                <span class="icon">
+                    <i class="fab fa-google"></i>
+                </span>
+                <span>Entrar com Google</span>
+            </a>
+
+            <p class="toggle-link">
+                Não tem uma conta? <a href="#" onclick="toggleForm()">Cadastre-se</a>
+            </p>
+        </div>
+    </div>
+
+    <script>
+        function toggleForm() {
+            const loginSection = document.getElementById("login-section");
+            const registerSection = document.getElementById("register-section");
+            loginSection.style.display = loginSection.style.display === "none" ? "block" : "none";
+            registerSection.style.display = registerSection.style.display === "none" ? "block" : "none";
+        }
+    </script>
+</body>
+</html>

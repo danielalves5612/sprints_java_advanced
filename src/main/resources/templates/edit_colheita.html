@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="#{edit.harvest.title}">Editar Colheita</title>
+</head>
+<body>
+    <div class="container">
+        <h1 th:text="#{edit.harvest.title}">Editar Colheita</h1>
+        <form th:action="@{/api/colheita/edit/{id}(id=${colheita.id})}" method="post">
+            <label for="nome" th:text="#{harvest.name}">Nome da Colheita:</label>
+            <input type="text" id="nome" name="nome" th:value="${colheita.nome}" required>
+
+            <label for="tipo" th:text="#{harvest.type}">Tipo de Colheita:</label>
+            <input type="text" id="tipo" name="tipo" th:value="${colheita.tipo}" required>
+
+            <label for="estacaoDoAno" th:text="#{harvest.season}">Estação do Ano:</label>
+            <input type="text" id="estacaoDoAno" name="estacaoDoAno" th:value="${colheita.estacaoDoAno}" required>
+
+            <button type="submit" th:text="#{edit.button}">Salvar Alterações</button>
+        </form>
+    </div>
+</body>
+</html>

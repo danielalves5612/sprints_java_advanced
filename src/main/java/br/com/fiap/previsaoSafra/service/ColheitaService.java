@@ -15,7 +15,6 @@ public class ColheitaService {
     @Autowired
     private ColheitaRepository colheitaRepository;
 
-    // Cadastrar Colheita
     public Colheita cadastrarColheita(ColheitaDTO colheitaDTO) {
         Colheita colheita = new Colheita();
         colheita.setNome(colheitaDTO.getNome());
@@ -24,7 +23,6 @@ public class ColheitaService {
         return colheitaRepository.save(colheita); 
     }
 
-    // Atualizar Colheita
     public Colheita atualizarColheita(Long id, ColheitaDTO novaColheita) {
         Optional<Colheita> colheitaExistente = colheitaRepository.findById(id);
 

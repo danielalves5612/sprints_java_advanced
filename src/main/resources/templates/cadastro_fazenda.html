@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="#{farm.form.title}">Cadastro de Fazenda</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <div class="container">
+        <h1 th:text="#{farm.form.title}">Cadastro de Fazenda</h1>
+
+        <form th:action="@{/api/fazenda/cadastrarFazenda}" method="post" enctype="application/x-www-form-urlencoded">
+            <label for="dono" th:text="#{farm.form.owner}">Dono da Fazenda:</label>
+            <input type="text" id="dono" name="dono" required>
+
+            <label for="latitude" th:text="#{farm.form.latitude}">Latitude:</label>
+            <input type="text" id="latitude" name="latitude" required>
+
+            <label for="longitude" th:text="#{farm.form.longitude}">Longitude:</label>
+            <input type="text" id="longitude" name="longitude" required>
+
+            <label for="tamanho" th:text="#{farm.form.size}">Tamanho (em hectares):</label>
+            <input type="number" id="tamanho" name="tamanho" required>
+
+            <button type="submit" th:text="#{farm.form.submit}">Cadastrar Fazenda</button>
+        </form>
+
+        <div style="text-align: center; margin-top: 20px;">
+            <a href="/" class="button" th:text="#{farm.form.back}">Voltar para a Página Inicial</a>
+        </div>
+    </div>
+</body>
+</html>

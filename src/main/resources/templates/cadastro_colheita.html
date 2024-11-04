@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="#{harvest.form.title}">Cadastro de Colheita</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <div class="container">
+        <h1 th:text="#{harvest.form.title}">Cadastro de Colheita</h1>
+
+        <form th:action="@{/api/colheita/cadastrar}" method="post" enctype="application/x-www-form-urlencoded">
+            <label for="nome" th:text="#{harvest.form.name}">Nome da Colheita:</label>
+            <input type="text" id="nome" name="nome" required>
+
+            <label for="tipo" th:text="#{harvest.form.type}">Tipo de Colheita:</label>
+            <input type="text" id="tipo" name="tipo" required>
+
+            <label for="estacaoDoAno" th:text="#{harvest.form.season}">Estação do Ano:</label>
+            <input type="text" id="estacaoDoAno" name="estacaoDoAno" required>
+
+            <label for="fazendaId" th:text="#{harvest.form.select.farm}">Selecione uma Fazenda:</label>
+            <select id="fazendaId" name="fazendaId" required>
+                <option value="" disabled selected th:text="#{harvest.form.select.default}">Selecione uma fazenda</option>
+                <option th:each="fazenda : ${fazendas}" th:value="${fazenda.id}" th:text="${fazenda.dono}"></option>
+            </select>
+
+            <button type="submit" th:text="#{harvest.form.submit}">Cadastrar Colheita</button>
+        </form>
+
+        <div style="text-align: center; margin-top: 20px;">
+            <a href="/" class="button" th:text="#{harvest.form.back}">Voltar para a Página Inicial</a>
+        </div>
+    </div>
+</body>
+</html>

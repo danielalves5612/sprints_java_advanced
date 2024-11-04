@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="#{welcome.message}">Página Inicial</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <script>
+        async function perguntarIA() {
+            const pergunta = document.getElementById("pergunta").value;
+
+            try {
+                const response = await fetch("/api/ai/processar?pergunta=" + encodeURIComponent(pergunta), {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error("Erro ao processar a pergunta: " + response.statusText);
+                }
+
+                const resposta = await response.text();
+                document.getElementById("resposta").innerText = resposta;
+            } catch (error) {
+                console.error(error);
+                document.getElementById("resposta").innerText = "Ocorreu um erro ao processar sua pergunta. Tente novamente.";
+            }
+        }
+
+        async function excluir(id, tipo) {
+            const confirmar = confirm(`Deseja realmente excluir esta ${tipo}?`);
+            if (!confirmar) return;
+
+            const url = tipo === 'fazenda' ? `/api/fazenda/deleteFazenda/${id}` : `/api/colheita/${id}`;
+            
+            try {
+                const response = await fetch(url, {
+                    method: "DELETE"
+                });
+                if (response.ok) {
+                    location.reload();
+                } else {
+                    alert(`Erro ao excluir a ${tipo}.`);
+                }
+            } catch (error) {
+                console.error("Erro:", error);
+                alert(`Erro ao excluir a ${tipo}.`);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelectorAll('.delete-fazenda').forEach(button => {
+                button.addEventListener('click', function () {
+                    const id = this.getAttribute('data-id');
+                    excluir(id, 'fazenda');
+                });
+            });
+
+            document.querySelectorAll('.delete-colheita').forEach(button => {
+                button.addEventListener('click', function () {
+                    const id = this.getAttribute('data-id');
+                    excluir(id, 'colheita');
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <!-- Seleção de Idioma -->
+        <div style="text-align: right;">
+            <span th:text="#{language.select}">Selecione o idioma:</span>
+            <a href="?lang=pt" th:text="#{language.portuguese}">Português</a> |
+            <a href="?lang=en" th:text="#{language.english}">Inglês</a> |
+            <a href="?lang=es" th:text="#{language.spanish}">Espanhol</a>
+        </div>
+
+        <h1 th:text="#{welcome.message}">Bem-vindo à Gestão de Fazendas e Colheitas</h1>
+
+        <!-- Seção de Perguntas para a IA -->
+        <h2 th:text="#{ask.ia}">Pergunte à IA sobre Agricultura</h2>
+        <input type="text" id="pergunta" th:placeholder="#{ask.placeholder}" placeholder="Digite sua pergunta">
+        <button onclick="perguntarIA()" th:text="#{ask.button}">Perguntar</button>
+        <p><strong th:text="#{ask.response}">Resposta da IA:</strong> <span id="resposta"></span></p>
+
+        <!-- Seção de Fazendas Cadastradas -->
+        <h2 th:text="#{farms.registered}">Fazendas Cadastradas</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th th:text="#{farm.owner}">Dono</th>
+                    <th th:text="#{farm.latitude}">Latitude</th>
+                    <th th:text="#{farm.longitude}">Longitude</th>
+                    <th th:text="#{farm.size}">Tamanho</th>
+                    <th th:text="#{farm.actions}">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="fazenda : ${fazendas}">
+                    <td th:text="${fazenda.dono}"></td>
+                    <td th:text="${fazenda.latitude}"></td>
+                    <td th:text="${fazenda.longitude}"></td>
+                    <td th:text="${fazenda.tamanho}"></td>
+                    <td>
+                        <a th:href="@{/api/fazenda/editFazenda/{id}(id=${fazenda.id})}" th:text="#{farm.edit}">Editar</a> |
+                        <button class="delete-fazenda" th:attr="data-id=${fazenda.id}" th:text="#{farm.delete}">Excluir</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Seção de Colheitas Cadastradas -->
+        <h2 th:text="#{harvest.registered}">Colheitas Cadastradas</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th th:text="#{harvest.name}">Nome</th>
+                    <th th:text="#{harvest.type}">Tipo</th>
+                    <th th:text="#{harvest.season}">Estação do Ano</th>
+                    <th th:text="#{harvest.actions}">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="colheita : ${colheitas}">
+                    <td th:text="${colheita.nome}"></td>
+                    <td th:text="${colheita.tipo}"></td>
+                    <td th:text="${colheita.estacaoDoAno}"></td>
+                    <td>
+                        <a th:href="@{/api/colheita/edit/{id}(id=${colheita.id})}" th:text="#{harvest.edit}">Editar</a> |
+                        <button class="delete-colheita" th:attr="data-id=${colheita.id}" th:text="#{harvest.delete}">Excluir</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div style="text-align: center; margin-top: 20px;">
+            <a th:href="@{/api/fazenda/formFazenda}" th:text="#{farm.register}" class="button">Cadastrar Nova Fazenda</a>
+            <a th:href="@{/api/colheita/form}" th:text="#{harvest.register}" class="button">Cadastrar Nova Colheita</a>
+        </div>
+    </div>
+</body>
+</html>
